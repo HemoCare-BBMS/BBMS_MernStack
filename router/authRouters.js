@@ -12,7 +12,7 @@ router.post('/register', registerController);
 //LOGIN || POST
 router.post('/login', loginController);
 
-//GET CURRENT
+//GET CURRENT USER || GET
 router.get('/current-user', authMiddleware, currentUserController)
 
 //export

@@ -34,5 +34,25 @@ const createInventoryController = async (req,res) => {
         });
     }
 };
+//GET ALL BLOOD RECORDS
+const getInventoryController = async (req,res) => {
+    try {
+        const inventory = await inventoryModel.find({organisation:req.body.userId});
+        return res.status(200).send({
+            success: true,
+            message: 'get All Records Successfully',
+            inventory,
+        })
 
-module.exports = { createInventoryController };
+    } catch (error) {
+        console.log(error)
+        return res.status(500).send({
+            success :false,
+            message :"Error in Get All Inventory ",
+            error
+        })
+
+    }
+};
+
+module.exports = { createInventoryController,getInventoryController};
