@@ -22,14 +22,15 @@ const createInventoryController = async (req,res) => {
         await inventory.save();
         return res.status(201).send({
             success: false,
-            message: 'Error In Create Inventory API',
-            error,
+            message: 'New Blood Record Added',
+            
         });
     } catch (error) {
         console.log(error)
         return res.status(500).send({
             success:false,
             message: "Error in Create Inventory API",
+            error,
         });
     }
 };
