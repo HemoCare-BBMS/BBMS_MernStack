@@ -1,12 +1,14 @@
 import React,{useState} from 'react';
 import InputType from './InputType';
+import {Link} from 'react-router-dom';
+import { handleLogin, handleRegister } from '../../../services/authService';
 
 const Form = ({formType,submitBtn ,formTitle}) => {
-  const [name, setName] = useState('');
+  
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [role, setRole] = useState('donor');
-
+  const [name, setName] = useState('');
   const [organizationName, setOrganizationName] = useState('');
   const [hospitalName, setHospitalName] = useState('');
   const [website, setWebsite] = useState('');
@@ -15,7 +17,12 @@ const Form = ({formType,submitBtn ,formTitle}) => {
  
   return (
     <div>
-      <form >
+      <form onSubmit={(e) => {
+        if(formType === 'login') 
+          return handleLogin(e,email,password,role);
+        else if (formType === 'register') 
+      return handleRegister(e,name,role,email,password,organizationName,hospitalName,website,address,phone);
+      }}>
         <h1 className='text-center'>{formTitle}</h1>
         <hr />
         <div className='d-flex mb-3'>
@@ -201,7 +208,17 @@ const Form = ({formType,submitBtn ,formTitle}) => {
         }
        })()}
 
-        <div className='d-flex'>
+        <div className='d-flex flex-row justify-content-between'>
+          {formType === 'login' ? (
+            <p>Not registered yet ? Register
+              <Link to='/register'> Here !</Link>
+            </p>
+            
+          ): (
+            <p>Already Registered Please
+            <Link to='/login'> Login !</Link>
+          </p>
+          )}
           <button className='btn btn-primary' type='submit'>
             {submitBtn }
           </button>
