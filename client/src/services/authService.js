@@ -26,7 +26,8 @@ export const handleRegister =(
     phone) => {
         e.preventDefault();
         try {
-            store.dispatch(userRegister(name,
+            store.dispatch(userRegister({
+                name,
                 role,
                 email,
                 password,
@@ -34,7 +35,8 @@ export const handleRegister =(
                 hospitalName,
                 website,
                 address,
-                phone))
+                phone
+            }))
         } catch (error) {
             console.log(error);
         }
