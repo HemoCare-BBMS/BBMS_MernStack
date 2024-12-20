@@ -1,5 +1,6 @@
 import React,{useEffect,useState} from 'react'
 import { useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 import Spinner from '../components/shared/Spinner'
 import Layout from '../components/shared/Layout/Layout'
 import Modal from '../components/shared/modal/Modal'
@@ -7,8 +8,9 @@ import API from '../services/API'
 import moment from 'moment'
 
 const HomePage = () => {
-const {loading, error} = useSelector ((state) => state.auth);
+const {loading, error,user} = useSelector ((state) => state.auth);
 const [data,setData] = useState([]);
+const navigate = useNavigate();
 
 //get function
 const getBloodRecords = async() => {
@@ -27,6 +29,7 @@ useEffect(() => {
 },[])
   return (
   <Layout>
+    {user?.role === 'admin' && navigate("/admin")}
     {error && <span>{alert(error)}</span>}
       {loading ? <Spinner/> :(
         <>
@@ -55,7 +58,7 @@ useEffect(() => {
                 <td>{record.bloodGroup}</td>
                 <td>{record.inventoryType}</td>
                 <td>{record.quantity } (ml)</td>
-                <td>{record.donorEmail}</td>
+                <td>{record.email}</td>
                 <td>{moment(record.createdAt).format("DD/MM/YYYY hh:mm A")}</td>
               </tr>
               

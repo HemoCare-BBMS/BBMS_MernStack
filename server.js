@@ -24,6 +24,9 @@ app.use(morgan("dev"));
 app.use('/api/v1/test', require('./router/testRouters'));
 app.use('/api/v1/auth', require('./router/authRouters'));
 app.use('/api/v1/inventory', require('./router/inventoryRouters'));
+app.use('/api/v1/analytics', require('./router/analyticsRouters'));
+app.use('/api/v1/admin', require('./router/adminRouters'));
+
 //port
 const PORT = process.env.PORT || 8080;
  
