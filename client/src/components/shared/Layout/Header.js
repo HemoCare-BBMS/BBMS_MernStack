@@ -45,6 +45,11 @@ const Header = () => {
               )
             }
             <li className='nav-item mx-3'>
+                <Link to="/aboutUs" className='nav-link' onClick="">
+                    About Us
+                </Link>
+            </li>
+            <li className='nav-item mx-3'>
                 <button className='btn btn-danger' onClick={handleLogout}>
                     Logout
                 </button>
