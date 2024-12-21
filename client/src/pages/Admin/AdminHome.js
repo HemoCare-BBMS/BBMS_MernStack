@@ -10,35 +10,22 @@ const AdminHome = () => {
             <h1>Welcome Admin <i className='text-danger-emphasis '>{user?.name}</i></h1>
             <hr></hr>
             <h3>Manage Blood Bank App</h3>
-            <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad
-            explicabo animi blanditiis incidunt dicta quia, quibusdam facere
-            corporis! Dolores, reprehenderit cum sed repellat laudantium
-            architecto natus est nostrum accusamus, odio aspernatur minima
-            fugiat quam molestiae nisi. Temporibus impedit dolorem quia.
-            Distinctio modi non excepturi illo odio voluptatum quae nostrum a
-            temporibus sequi! Explicabo, quasi consequatur ad qui quos labore
-            distinctio voluptates alias nostrum ab dicta aspernatur molestias
-            adipisci quibusdam error ipsa. Totam, tenetur dolores eaque tempora
-            officiis deserunt assumenda? Rerum nemo est nihil laudantium
-            necessitatibus. Possimus, voluptatem voluptates blanditiis quas
-            aspernatur, quam, quaerat minus maiores ipsam sint perferendis
-            dolor. Dignissimos voluptatem doloribus sint in quis omnis, atque
-            neque praesentium voluptatum suscipit. Quas esse, accusantium maxime
-            obcaecati iure officiis aperiam minus alias quod cum quos qui
-            voluptatibus, numquam, ad id dolore odit! Minima laudantium sunt,
-            explicabo nesciunt quos voluptatibus qui libero eligendi praesentium
-            debitis obcaecati similique assumenda nobis labore totam dolore
-            perferendis adipisci fugiat quibusdam tempore doloremque voluptatum
-            accusantium. Accusamus, incidunt sequi. Esse sunt officia fuga,
-            officiis saepe tempora repellat suscipit aliquid cupiditate
-            perferendis, asperiores architecto molestiae rem iste eaque
-            molestias reiciendis. Laborum modi asperiores, reprehenderit
-            assumenda numquam, vitae exercitationem illum nesciunt, dolorum
-            deleniti accusamus consequatur id. Necessitatibus dolore ad fugit?
-            </p>
+          
+           <div>
+  <div className="card mb-3">
+    <img src="./assets/images/bloodcon.jpg" className="card-img-top" alt="blood donation condition" width="80px" height="350px" />
+    <div className="card-body">
+      <h5 className="card-title">Blood Donation Info</h5>
+      <p className="card-text">The universally accepted criteria for donor selection are: Age between 18 and 60 years. Haemoglobin - not less than 12.5 g/Dl. Pulse - between 50 and 100/minute with no irregularities.</p>
+      <p className="card-text"><small className="text-body-secondary">Last updated 3 mins ago</small></p>
+    </div>
+  </div>
+  
+
+</div>
         </div>
       </div>
+      
     </Layout>
   )
 }

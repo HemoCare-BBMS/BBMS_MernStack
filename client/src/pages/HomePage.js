@@ -30,6 +30,7 @@ useEffect(() => {
   return (
   <Layout>
     {user?.role === 'admin' && navigate("/admin")}
+    
     {error && <span>{alert(error)}</span>}
       {loading ? <Spinner/> :(
         <>
@@ -63,12 +64,23 @@ useEffect(() => {
               </tr>
               
               ))}
+            
               
             </tbody>
           </table>
 
           <Modal/>
         </div>
+        <div>
+            <div className="card mb-3">
+              <img src="./assets/images/bloodcon.jpg" className="card-img-top" alt="blood donation condition" width="80px" height="350px" />
+              <div className="card-body">
+                <h5 className="card-title">Blood Donation Info</h5>
+                <p className="card-text">The universally accepted criteria for donor selection are: Age between 18 and 60 years. Haemoglobin - not less than 12.5 g/Dl. Pulse - between 50 and 100/minute with no irregularities.</p>
+                <p className="card-text"><small className="text-body-secondary">Last updated 3 mins ago</small></p>
+              </div>
+            </div>
+            </div>
         </>
       )}
        
