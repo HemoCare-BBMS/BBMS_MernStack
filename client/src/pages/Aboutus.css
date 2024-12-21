@@ -1,0 +1,34 @@
+.container{
+   
+}
+
+section {
+    padding: 60px 0;
+    background-color: rgb(137, 13, 37);
+
+    
+  }
+ 
+  h2 {
+    font-weight: 700;
+    
+  }
+  
+  .card {
+    border: none;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .form-control {
+    border-radius: 0.25rem;
+  }
+  
+  .btn-primary {
+    background-color: #dc3545; /* Hemocare's theme color (Red) */
+    border: none;
+  }
+  
+  .btn-primary:hover {
+    background-color: #c82333;
+  }
+  
