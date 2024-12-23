@@ -41,12 +41,13 @@ const Modal = () => {
   <div className="modal-dialog">
     <div className="modal-content">
       <div className="modal-header">
-        <h1 className="modal-title fs-5" id="staticBackdropLabel">Manage Blood Record</h1>
+        <h1 className="modal-title fs-5" id="staticBackdropLabel">Add Blood Record</h1>
         <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close" />
       </div>
       <div className="modal-body">
         <div className='d-flex mb-3'>
-          Blood Type: &nbsp;
+        Select Blood Type: &nbsp;
+        
           <div className='form-check ms-3'>
             <input className="form-check-input" 
             type="radio" 
@@ -76,7 +77,7 @@ const Modal = () => {
         <select className="form-select" 
           aria-label="Default select example"
           onChange={(e) => setBloodGroup(e.target.value)}>
-        <option defaultValue={"Open this select menu"}>Open this select menu</option>
+        <option defaultValue={"Open this select menu"}>Open this select menu </option>
         <option value={'O+'}>O+</option>
         <option value={'O-'}>O-</option>
         <option value={'AB+'}>AB+</option>

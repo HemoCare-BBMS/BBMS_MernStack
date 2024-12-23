@@ -33,8 +33,13 @@ return (
         )}
          {user?.role === 'admin' && (
           <>
-           <div className={`menu-item ${location.pathname === "/donor-list" && 'active'}`}
+          <div className={`menu-item ${location.pathname === "/inventory-stock" && 'active'}`}
                     >
+                        <i className="fa-solid fa-warehouse"></i>
+                        <Link to="/inventory-stock">Inventory</Link>
+                    </div>
+           <div className={`menu-item ${location.pathname === "/donor-list" && 'active'}`}
+           >
                         <i className="fa-solid fa-hand-holding-medical"></i>
                         <Link to="/donor-list">Donor List</Link>
                     </div>
@@ -48,6 +53,7 @@ return (
                         <i className="fa-solid fa-building-ngo"></i>
                         <Link to="/org-list">Organization List</Link>
                     </div>
+                    
           </>
         )}
           {(user?.role === 'donor' || user?.role === "hospital") && (
