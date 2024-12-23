@@ -10,15 +10,17 @@ const Aboutus = () => {
           <div className="container my-5">
             {/* Mission and Vision */}
             <section className="mb-5">
-              <h2 className="text-center text-light mb-4">About HemoCare Blood Bank</h2>
+            <h2 className="text-center text-light mb-4 ">About HemoCare Blood Bank</h2>
+            <img src="./assets/images/banner2.jpg" className="card-img-top" alt="blood donation condition" width="80px" height="350px" />
+              
               <div className="row">
-                <div className="col-md-6 text-light">
+                <div className="col-md-6 mt-4 text-light">
                   <h4>Our Mission</h4>
                   <p>
                     At Hemocare, our mission is to ensure the safe and timely availability of blood and blood components to those in need. We strive to promote voluntary blood donation and maintain a robust and efficient blood supply chain.
                   </p>
                 </div>
-                <div className="col-md-6 text-light">
+                <div className="col-md-6 mt-4 text-light">
                   <h4>Our Vision</h4>
                   <p>
                     We envision a world where every individual has access to safe blood transfusions, and blood donation is a communal responsibility embraced by all. Our goal is to lead in blood management practices and innovate to save lives.

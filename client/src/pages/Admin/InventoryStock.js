@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import Layout from './../../components/shared/Layout/Layout'
 import API from '../../services/API';
-import { useSelector } from 'react-redux';
+//import { useSelector } from 'react-redux';
 import moment from 'moment';
 import { Link } from 'react-router-dom';
 
 const InventoryStock = () => {
-    const {loading, error,user} = useSelector ((state) => state.auth);
+    //const {} = useSelector ((state) => state.auth);
     const [data,setData] = useState([]);
     const getBloodRecords = async() => {
         try {
