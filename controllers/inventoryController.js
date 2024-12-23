@@ -111,6 +111,31 @@ const getInventoryController = async (req, res) => {
     }
   };
 
+  //GET ALL BLOOD RECORDS IN ADMIN PAGE
+  const getInventoryControllerAdmin = async (req, res) => {
+    try {
+        const inventory = await inventoryModel
+
+            .find({})
+            .populate("donor") // Populate donor details
+            .populate("hospital") // Populate hospital details
+            .sort({ createdAt: -1 }); 
+                
+        return res.status(200).send({
+          success: true,
+          messaage: "get all records successfully",
+          inventory,
+        });
+      } catch (error) {
+        console.log(error);
+        return res.status(500).send({
+          success: false,
+          message: "Error In Get All Inventory",
+          error,
+        });
+      }
+  }
+
 //GET HOSPITAL BLOOD RECORDS
 const getInventoryHospitalController = async (req,res) => {
     try {
@@ -253,6 +278,30 @@ const getOrganizationForHospitalController = async (req,res) =>{
     }
 };
 
+//GET BLOOD RECORD OF 3
+const getAdminRecentInventoryController = async (req,res) =>{
+    try {
+        const inventory = await inventoryModel
+        
+        .find({})
+        .populate("donor") // Populate donor details
+        .populate("hospital") // Populate hospital details
+        .limit(5)
+        .sort({createdAt: -1});
+        return res.status(200).send({
+            success:true,
+            message: 'get Recent Inventory Successfully',
+            inventory,
+        })
+    } catch (error) {
+       console.log(error) 
+       return res.status(500).send({
+        success :false,
+        message :"Error in Get Recent Inventory API",
+        error,
+       })
+    }
+}
 module.exports = { createInventoryController,
     getInventoryController,
     getDonorsController,
@@ -260,4 +309,6 @@ module.exports = { createInventoryController,
     getOrganizationController,
     getOrganizationForHospitalController,
     getInventoryHospitalController,
-    getRecentInventoryController};
+    getRecentInventoryController,
+    getInventoryControllerAdmin,
+    getAdminRecentInventoryController};

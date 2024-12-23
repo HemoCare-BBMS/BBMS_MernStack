@@ -19,13 +19,27 @@ import OrgList from './pages/Admin/OrgList';
 import AdminHome from './pages/Admin/AdminHome';
 import Aboutus from './pages/Aboutus';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import InventoryStock from './pages/Admin/InventoryStock';
+import AdminAnalytics from './pages/Dashboard/AdminAnalytics';
 
 function App() {
   return (
     <>
     <ToastContainer/>
-    
+      
       <Routes>
+      <Route path="/admin-analytics" element={
+          <ProtectedRoute >
+          <AdminAnalytics/>
+          </ProtectedRoute>
+          } 
+          />
+      <Route path="/inventory-stock" element={
+          <ProtectedRoute >
+          <InventoryStock/>
+          </ProtectedRoute>
+          } 
+          />
       <Route path="/aboutUs" element={
           <ProtectedRoute >
           <Aboutus/>

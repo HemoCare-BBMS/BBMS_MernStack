@@ -43,6 +43,7 @@ const inventorySchema = new mongoose.Schema(
         return this.inventoryType === "in";
       },
     },
+    
   },
   { timestamps: true }
 );
