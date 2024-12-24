@@ -68,6 +68,7 @@ const Modal = () => {
             value={'out'} 
             onChange={(e) => setInventoryType(e.target.value)}>
             </input>
+            
             <label htmlFor='out'className='form-check-label'>
             OUT
           </label>
@@ -87,7 +88,7 @@ const Modal = () => {
         <option value={'B+'}>B+</option>
         <option value={'B-'}>B-</option>
         </select>
-        <InputType labelText={'Donor Email'}
+        <InputType labelText={'Donor/Receiver Email'}
         labelFor = {'donorEmail'}
         inputType={'email'}
         value = {email}
