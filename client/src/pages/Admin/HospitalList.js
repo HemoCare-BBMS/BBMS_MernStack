@@ -34,6 +34,11 @@ const HospitalList = () => {
       console.log(error)
     }
   }
+
+  const handleEdit = async() =>{
+
+  }
+
 return (
   <Layout>
       <table className="table">
@@ -56,6 +61,9 @@ return (
                           <td>{record.phone}</td>
                           <td>{moment(record.createdAt).format("DD/MM/YYYY hh:mm A")}</td>
                           <td>{moment(record.lastAccess).format("DD/MM/YYYY hh:mm A")}</td>
+                          <td>
+                            <button className='btn btn-success' onClick={() => handleEdit(record) }>Update</button>
+                          </td>
                           
                           <td>
                             <button className='btn btn-danger' onClick={() => handelDelete(record._id) }>Delete</button>

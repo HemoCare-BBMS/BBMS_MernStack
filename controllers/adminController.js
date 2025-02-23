@@ -4,7 +4,8 @@ const getDonorsListController = async (req,res) =>{
 try {
     const donorData = await usermodel
     .find({role: "donor"})
-    .sort({ createdAt:-1});
+    .sort({ createdAt:-1})
+    .sort({ lastAccess: -1 });
     return res.status(200).send({
         success: true,
         Toatlcount: donorData.length,
@@ -26,7 +27,8 @@ const getHospitalListController = async (req,res) =>{
     try {
         const hospitalData = await usermodel
         .find({role: "hospital"})
-        .sort({ createdAt:-1});
+        .sort({ createdAt:-1})
+        .sort({ lastAccess: -1 });
         return res.status(200).send({
             success: true,
             Toatlcount: hospitalData.length,
@@ -48,7 +50,8 @@ const getOrgListController = async (req,res) =>{
     try {
         const orgData = await usermodel
         .find({role: "organization"})
-        .sort({ createdAt:-1});
+        .sort({ createdAt:-1})
+        .sort({ lastAccess: -1 });
         return res.status(200).send({
             success: true,
             Toatlcount: orgData.length,
@@ -85,6 +88,38 @@ const getOrgListController = async (req,res) =>{
         }
     };
 
+     //UPDATE DONOR
+     const updateDonorController = async (req,res) =>{
+      try {
+        const donorId = req.params.id; // Donor ID from the route parameter
+        const updatedData = req.body; // Updated data from the request body
+    
+        // Update donor by ID
+        const updatedDonor = await usermodel.findByIdAndUpdate(donorId, updatedData, { new: true });
+    
+        if (!updatedDonor) {
+          return res.status(404).send({
+            success: false,
+            message: "Donor not found",
+          });
+        }
+    
+        return res.status(200).send({
+          success: true,
+          message: "Donor updated successfully",
+          donor: updatedDonor,
+        });
+      } catch (error) {
+        console.error(error);
+        return res.status(500).send({
+          success: false,
+          message: "Error while updating donor",
+          error,
+        });
+      }
+  };
+
+      
    
     
     
@@ -94,4 +129,5 @@ const getOrgListController = async (req,res) =>{
 module.exports = {getDonorsListController,
     getHospitalListController,
     getOrgListController,deleteDonorController,
+    updateDonorController
    };

@@ -3,8 +3,10 @@ import Layout from './../../components/shared/Layout/Layout';
 import moment from 'moment';
 import API from '../../services/API';
 
+
 const DonorList = () => {
   const [data, setData] = useState([]);
+  
   //find donor records
   const getDonors = async() =>{
       try {
@@ -22,6 +24,7 @@ const DonorList = () => {
       getDonors();
   }, []);
 
+  
   //DELETE FUNCTION
   const handelDelete = async (id) =>{
     try {
@@ -35,6 +38,10 @@ const DonorList = () => {
     }
   }
 
+  const handleEdit = async () => {
+    
+  };
+  
   
 return (
   <Layout>
@@ -57,7 +64,11 @@ return (
                           <td>{record.email}</td>
                           <td>{record.phone}</td>
                           <td>{moment(record.createdAt).format("DD/MM/YYYY hh:mm A")}</td>
-                          <td>{moment(record.lastAccess).format("DD/MM/YYYY hh:mm A")}</td>
+                          { <td>{moment(record.lastAccess).format("DD/MM/YYYY hh:mm A")}</td> }
+                          <td>
+                            <button className='btn btn-success' onClick={() => handleEdit(record) }>Update</button>
+                          </td>
+                          
                           <td>
                             <button className='btn btn-danger' onClick={() => handelDelete(record._id) }>Delete</button>
                           </td>
@@ -67,6 +78,10 @@ return (
                     
                   </tbody>
                 </table>
+                
+                
+               
+
       
   </Layout>
 )
