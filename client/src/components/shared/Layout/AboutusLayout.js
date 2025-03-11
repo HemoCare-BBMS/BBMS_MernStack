@@ -10,7 +10,7 @@ const AboutusLayout = ({children}) => {
         <Header/>
       </div>
       <div>
-        {children}
+        {}
       </div>
       
     </>
