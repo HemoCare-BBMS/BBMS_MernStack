@@ -39,7 +39,8 @@ const Form = ({formType,submitBtn ,formTitle}) => {
               Donor
             </label>
           </div>
-          <div className='form-check ms-2'>
+          {formType === 'login' && (
+            <div className='form-check ms-2'>
             <input type='radio' 
             className='form-check-input' 
             name='role' 
@@ -52,6 +53,8 @@ const Form = ({formType,submitBtn ,formTitle}) => {
               Admin
             </label>
           </div>
+        )}
+          
           <div className='form-check ms-2'>
             <input type='radio' 
             className='form-check-input' 
@@ -113,7 +116,7 @@ const Form = ({formType,submitBtn ,formTitle}) => {
            return (
             <>
 
-          {(role === 'admin' || role === 'donor' )&& (
+          {(role === 'donor' )&& (
               <InputType 
 
               labelText={'Name'} 
@@ -216,7 +219,7 @@ const Form = ({formType,submitBtn ,formTitle}) => {
             
           ): (
             <p>Already Registered Please
-            <Link to='/login'> Login !</Link>
+            <Link to='/login'> Login ! </Link>
           </p>
           )}
           <button className='btn btn-primary' type='submit'>
