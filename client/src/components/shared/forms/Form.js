@@ -219,7 +219,7 @@ const Form = ({formType,submitBtn ,formTitle}) => {
             
           ): (
             <p>Already Registered Please
-            <Link to='/login'> Login ! </Link>
+            <Link to='/login'> Login! </Link>
           </p>
           )}
           <button className='btn btn-primary' type='submit'>
