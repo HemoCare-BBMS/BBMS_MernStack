@@ -48,7 +48,7 @@ const DonorList = () => {
     if (!newName || !newEmail || !newPhone) return;
 
     try {
-        const {data} = await API.put(`/admin/update-hospital/${record._id}`,{
+        const {data} = await API.put(`/admin/update-donor/${record._id}`,{
             name: newName,
             email:newEmail,
             phone:newPhone,

@@ -34,8 +34,25 @@ const OrgList = () => {
       console.log(error)
     }
   }
-  const handleEdit = async() =>{
+  const handleEdit = async (record) => {
+    const newName = window.prompt("Enter new name:", record.organizationName);
+    const newEmail = window.prompt("Enter new email:", record.email);
+    const newPhone = window.prompt("Enter new phone:", record.phone);
 
+    if (!newName || !newEmail || !newPhone) return;
+
+    try {
+        const {data} = await API.put(`/admin/update-organization/${record._id}`,{
+          organizationName: newName,
+            email:newEmail,
+            phone:newPhone,
+
+        });
+        alert(data?.message);
+        window.location.reload();
+    } catch (error) {
+        console.log(error);
+    }
   }
 return (
   <Layout>

@@ -119,29 +119,69 @@ const getOrgListController = async (req,res) =>{
       }
   };
 
-const handleEdit = async (record) => {
-    const newName = window.prompt("Enter new name:", record.name);
-    const newEmail = window.prompt("Enter new email:", record.email);
-    const newPhone = window.prompt("Enter new phone:", record.phone);
-
-    if (!newName || !newEmail || !newPhone) return;
-
+   //UPDATE HOSPITAL
+   const updateHospitalController = async (req,res) =>{
     try {
-        const {data} = await API.put(`/adin/update-donor/${record._id}`,{
-            name: newName,
-            email:newEmail,
-            phone:newPhone,
-
+      const hospitalId = req.params.id; // Hospital ID from the route parameter
+      const updatedData = req.body; // Updated data from the request body
+  
+      // Update hospital by ID
+      const updatedHospital = await usermodel.findByIdAndUpdate(hospitalId, updatedData, { new: true });
+  
+      if (!updatedHospital) {
+        return res.status(404).send({
+          success: false,
+          message: "Hospital not found",
         });
-        alert(data?.message);
-        window.location.reload();
+      }
+  
+      return res.status(200).send({
+        success: true,
+        message: "Hospital updated successfully",
+        donor: updatedHospital,
+      });
     } catch (error) {
-        console.log(error);
+      console.error(error);
+      return res.status(500).send({
+        success: false,
+        message: "Error while updating Hospital",
+        error,
+      });
     }
-
 };
-      
-   
+
+
+//UPDATE ORGANIZATION
+const updateOrganizationController = async (req,res) =>{
+    try {
+      const organizationId = req.params.id; // Organization ID from the route parameter
+      const updatedData = req.body; // Updated data from the request body
+  
+      // Update organization by ID
+      const updatedOrganization = await usermodel.findByIdAndUpdate(organizationId, updatedData, { new: true });
+  
+      if (!updatedOrganization) {
+        return res.status(404).send({
+          success: false,
+          message: "Organization not found",
+        });
+      }
+  
+      return res.status(200).send({
+        success: true,
+        message: "Organization updated successfully",
+        donor: updatedOrganization,
+      });
+    } catch (error) {
+      console.error(error);
+      return res.status(500).send({
+        success: false,
+        message: "Error while updating Organization",
+        error,
+      });
+    }
+};
+
     
     
     
@@ -150,5 +190,5 @@ const handleEdit = async (record) => {
 module.exports = {getDonorsListController,
     getHospitalListController,
     getOrgListController,deleteDonorController,
-    updateDonorController,handleEdit
+    updateDonorController,updateHospitalController,updateOrganizationController
    };

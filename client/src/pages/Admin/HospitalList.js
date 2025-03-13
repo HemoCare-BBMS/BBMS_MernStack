@@ -36,15 +36,15 @@ const HospitalList = () => {
   }
 
   const handleEdit = async (record) => {
-    const newName = window.prompt("Enter new name:", record.name);
+    const newName = window.prompt("Enter new name:", record.hospitalName);
     const newEmail = window.prompt("Enter new email:", record.email);
     const newPhone = window.prompt("Enter new phone:", record.phone);
 
     if (!newName || !newEmail || !newPhone) return;
 
     try {
-        const {data} = await API.put(`/admin/update-donor/${record._id}`,{
-            name: newName,
+        const {data} = await API.put(`/admin/update-hospital/${record._id}`,{
+          hospitalName: newName,
             email:newEmail,
             phone:newPhone,
 
