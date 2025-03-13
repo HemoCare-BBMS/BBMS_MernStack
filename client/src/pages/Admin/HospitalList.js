@@ -35,10 +35,27 @@ const HospitalList = () => {
     }
   }
 
-  const handleEdit = async() =>{
+  const handleEdit = async (record) => {
+    const newName = window.prompt("Enter new name:", record.name);
+    const newEmail = window.prompt("Enter new email:", record.email);
+    const newPhone = window.prompt("Enter new phone:", record.phone);
 
-  }
+    if (!newName || !newEmail || !newPhone) return;
 
+    try {
+        const {data} = await API.put(`/admin/update-donor/${record._id}`,{
+            name: newName,
+            email:newEmail,
+            phone:newPhone,
+
+        });
+        alert(data?.message);
+        window.location.reload();
+    } catch (error) {
+        console.log(error);
+    }
+
+};
 return (
   <Layout>
       <table className="table">
