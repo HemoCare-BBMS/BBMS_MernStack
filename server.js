@@ -16,7 +16,11 @@ const app = express();
 
 //middileware
 app.use(express.json());
-app.use(cors());
+//only allow the frontend origins listed in CLIENT_URL (comma-separated)
+const allowedOrigins = (process.env.CLIENT_URL || "http://localhost:3000")
+  .split(",")
+  .map((origin) => origin.trim());
+app.use(cors({ origin: allowedOrigins }));
 app.use(morgan("dev"));
 
 //routes
@@ -32,7 +36,7 @@ const PORT = process.env.PORT || 8080;
  
 //listen
 app.listen(PORT, () => {
-    console.log(`Node Server Running In ${process.env.DEV_MODE} ModeOn Port ${process.env.PORT}`
+    console.log(`Node Server Running In ${process.env.DEV_MODE} Mode On Port ${PORT}`
       .bgBlue.white);
 });
 
