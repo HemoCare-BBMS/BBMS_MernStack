@@ -34,9 +34,14 @@ app.use('/api/v1/admin', require('./router/adminRouters'));
 //port
 const PORT = process.env.PORT || 8080;
  
-//listen
-app.listen(PORT, () => {
-    console.log(`Node Server Running In ${process.env.DEV_MODE} Mode On Port ${PORT}`
-      .bgBlue.white);
-});
+//listen only when run directly (npm start / npm run server);
+//on Vercel the app is exported and run as a serverless function
+if (require.main === module) {
+  app.listen(PORT, () => {
+      console.log(`Node Server Running In ${process.env.DEV_MODE} Mode On Port ${PORT}`
+        .bgBlue.white);
+  });
+}
+
+module.exports = app;
 

@@ -86,7 +86,7 @@ Existing blood bank processes are decentralized and largely manual, which causes
 | Frontend   | React 18, Redux Toolkit, React Router 7, Axios, Bootstrap 5, React Toastify |
 | Backend    | Node.js, Express 4, Mongoose 8, JSON Web Token, bcryptjs, Morgan, CORS |
 | Database   | MongoDB (MongoDB Atlas in production)                            |
-| Deployment | Render (backend), Vercel (frontend)                              |
+| Deployment | Vercel (backend as a serverless function + frontend)             |
 
 ## Project Structure
 
@@ -155,7 +155,7 @@ npm run dev
 
 | Variable     | Description                                         | Example                                   |
 | ------------ | --------------------------------------------------- | ----------------------------------------- |
-| `PORT`       | Port the API listens on (Render sets this itself)   | `8080`                                    |
+| `PORT`       | Port the API listens on locally                     | `8080`                                    |
 | `DEV_MODE`   | Environment label shown in the server log           | `development`                             |
 | `MONGO_URL`  | MongoDB connection string                           | `mongodb+srv://<user>:<password>@<cluster-host>/<db_name>` |
 | `JWT_SECRET` | Secret used to sign login tokens                    | `<long_random_secret>`                    |
@@ -227,33 +227,38 @@ Full test cases and results: [Test Case Document](https://docs.google.com/spread
 
 ## Deployment
 
-The app is deployed as two parts: the **backend** on [Render](https://render.com) and the **frontend** on [Vercel](https://vercel.com), both using a **MongoDB Atlas** database.
+Both parts are deployed on [Vercel](https://vercel.com) as **two separate projects** from this one repository, using a **MongoDB Atlas** database.
+
+| Project  | Root Directory | Serves |
+| -------- | -------------- | ------ |
+| Backend  | *(repo root)*  | Express API, run as a serverless function via `api/index.js` |
+| Frontend | `client`       | React build |
 
 ### 1. MongoDB Atlas
 
 1. Create a free **M0** cluster at <https://cloud.mongodb.com>.
-2. **Database Access** → *Add New Database User* → username + auto-generated password (role: *Read and write to any database*).
-3. **Network Access** → *Add IP Address* → `0.0.0.0/0` (Render's free tier has no fixed outbound IP).
-4. **Database** → *Connect* → *Drivers* → copy the connection string and add a database name, e.g.
-   `mongodb+srv://<user>:<password>@<cluster-host>/bbms?retryWrites=true&w=majority`
+2. **Database Access** → *Add New Database User* → username + auto-generated password.
+3. **Network Access** → *Add IP Address* → `0.0.0.0/0` (Vercel has no fixed outbound IP).
+4. **Clusters** → *Connect* → *Drivers* → copy the connection string and add the database name, e.g.
+   `mongodb+srv://<user>:<password>@<cluster-host>/<db_name>?retryWrites=true&w=majority`
 
-### 2. Backend on Render
+### 2. Backend on Vercel
 
-*New* → *Web Service* → connect the GitHub repo, then:
+*Add New* → *Project* → import the repo, then:
 
-| Setting        | Value                         |
-| -------------- | ----------------------------- |
-| Root Directory | *(leave empty — repo root)*   |
-| Runtime        | Node                          |
-| Build Command  | `npm install`                 |
-| Start Command  | `npm start`                   |
-| Health Check Path | `/api/v1/test`             |
+| Setting          | Value                         |
+| ---------------- | ----------------------------- |
+| Root Directory   | *(leave as `./`)*             |
+| Framework Preset | Other                         |
+| Build / Output / Install | defaults              |
 
-Environment variables: `MONGO_URL`, `JWT_SECRET`, `DEV_MODE=production`, `CLIENT_URL=https://<your-app>.vercel.app`. Do **not** set `PORT` — Render provides it.
+Environment variables: `MONGO_URL`, `JWT_SECRET`, `DEV_MODE=production`, `CLIENT_URL=https://<your-frontend>.vercel.app`.
+
+The root `vercel.json` sends every request to `api/index.js`, which loads the Express app from `server.js`. Check it at `https://<your-backend>.vercel.app/api/v1/test`.
 
 ### 3. Frontend on Vercel
 
-*Add New* → *Project* → import the GitHub repo, then:
+*Add New* → *Project* → import the same repo again, then:
 
 | Setting          | Value                     |
 | ---------------- | ------------------------- |
@@ -262,13 +267,13 @@ Environment variables: `MONGO_URL`, `JWT_SECRET`, `DEV_MODE=production`, `CLIENT
 | Build Command    | `CI=false npm run build`  |
 | Output Directory | `build`                   |
 
-Environment variable: `REACT_APP_BASEURL=https://<your-backend>.onrender.com/api/v1`
+Environment variable: `REACT_APP_BASEURL=https://<your-backend>.vercel.app/api/v1`
 
 `client/vercel.json` rewrites all paths to `index.html` so refreshing a page such as `/donor-list` does not return a 404.
 
-After Vercel gives you the final URL, update `CLIENT_URL` on Render to match it exactly (no trailing slash).
+After the frontend is deployed, set `CLIENT_URL` in the backend project to the frontend URL exactly (no trailing slash) and redeploy the backend.
 
-> Render's free tier sleeps after ~15 minutes of inactivity, so the first request after a pause can take up to a minute.
+> Free MongoDB Atlas clusters pause after about 60 days without connections. If the live site stops logging in, resume the cluster in Atlas.
 
 ## Limitations & Future Work
 
