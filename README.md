@@ -113,7 +113,7 @@ BBMS_MernStack/
 
 ### Prerequisites
 
-- [Node.js](https://nodejs.org/) 18 or newer
+- [Node.js](https://nodejs.org/) 22.x (LTS)
 - npm
 - A MongoDB database (local install or a free [MongoDB Atlas](https://www.mongodb.com/atlas) cluster)
 
